@@ -37,3 +37,7 @@ inoremap jj <esc> " remap esc to jj
 
 " set timeout timeoutlen=1000 ttimeoutlen=100 "Set timeout after special symbols
 
+" completion in command mode
+set wildmode=longest,list,full
+set wildmenu
+
