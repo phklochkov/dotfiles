@@ -30,3 +30,9 @@ set shiftround " tab / shifting moves to closest tabstop.
 set autoindent " Match indents on new lines.
 set smartindent " Intellegently dedent / indent new lines based on rules.
 
+inoremap jj <esc> " remap esc to jj
+"inoremap jk <esc>
+"inoremap kj <esc>
+
+" set timeout timeoutlen=1000 ttimeoutlen=100 "Set timeout after special symbols
+
