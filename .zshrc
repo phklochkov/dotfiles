@@ -49,7 +49,7 @@ ZSH_THEME="ys"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git vi-mode vim-interaction)
 
 # User configuration
 
@@ -84,4 +84,8 @@ source $ZSH/oh-my-zsh.sh
 alias zshconfig="vim ~/.zshrc"
 alias diary="cd ~/code/journal && vim `date +"%Y-%m-%d"`.md"
 alias godir="cd $GOPATH"
+
+bindkey -v # set vi keys mode
+
+export KEYTIMEOUT=1 # set lag between edit/insert mode to 0.1 second
 
