@@ -87,5 +87,6 @@ alias godir="cd $GOPATH"
 
 bindkey -v # set vi keys mode
 
+export GOPATH=$HOME/code/golang
 export KEYTIMEOUT=1 # set lag between edit/insert mode to 0.1 second
-
+export PATH=$PATH:$GOPATH/bin
