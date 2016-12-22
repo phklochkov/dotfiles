@@ -44,3 +44,7 @@ set statusline=%F
 set wildmode=longest,list,full
 set wildmenu
 set showcmd
+
+" changes whitespace/tabs etc. display
+:set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+:set list
