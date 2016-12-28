@@ -8,7 +8,13 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " plugin for golang
-Plugin 'fatih/vim-go'
+" Plugin 'fatih/vim-go'
+
+" plugin for rust
+Plugin 'rust-lang/rust.vim'
+
+" plugin for surrounding ()
+Plugin 'tpope/vim-surround'
 
 call vundle#end()            " required
 
@@ -19,7 +25,7 @@ syntax on " Syntax highlighting
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 
-set number
+set number relativenumber
 
 set tabstop=2
 set shiftwidth=2
@@ -35,6 +41,10 @@ inoremap jj <esc> " remap esc to jj
 " inoremap jk <esc>
 " inoremap kj <esc>
 
+" make enter work in normal mode
+map <Cr> o<Esc>
+map <S-Cr> O<Esc>
+
 set timeout timeoutlen=1000 ttimeoutlen=100 "Set timeout after special symbols
 
 " set status line
@@ -48,3 +58,6 @@ set showcmd
 " changes whitespace/tabs etc. display
 :set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 :set list
+
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+set pastetoggle=<F2>
