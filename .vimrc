@@ -16,7 +16,13 @@ Plugin 'rust-lang/rust.vim'
 " plugin for surrounding ()
 Plugin 'tpope/vim-surround'
 
-call vundle#end()            " required
+" color themes
+Plugin 'crusoexia/vim-monokai'
+
+call vundle#end() " required
+
+colorscheme monokai
+set t_Co=256
 
 " We have to turn this stuff back on if we want all of our features.
 filetype plugin indent on " Filetype auto-detection
@@ -39,7 +45,9 @@ set autoindent " Match indents on new lines.
 set smartindent " Intellegently dedent / indent new lines based on rules.
 
 " shortcut for vimrc open
-:nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+:nnoremap <leader>ve :vsplit $MYVIMRC<cr>
+" shortcut for vimrc source
+:nnoremap <leader>vs :source $MYVIMRC<cr>
 
 set incsearch " Show the first match for the pattern typing
 
@@ -56,6 +64,7 @@ set timeout timeoutlen=1000 ttimeoutlen=100 "Set timeout after special symbols
 " set status line
 set laststatus=2
 set statusline=%F
+
 " completion in command mode
 set wildmode=longest,list,full
 set wildmenu
