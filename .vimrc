@@ -75,4 +75,4 @@ set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 set list
 
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
-set pastetoggle=<F2>
+set pastetoggle=<leader>p
