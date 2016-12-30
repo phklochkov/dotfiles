@@ -22,6 +22,8 @@ call vundle#end()            " required
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
 
+let mapleader=","
+
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 
@@ -35,11 +37,15 @@ set smarttab " let's tab key insert 'tab stops', and bksp deletes tabs.
 set shiftround " tab / shifting moves to closest tabstop.
 set autoindent " Match indents on new lines.
 set smartindent " Intellegently dedent / indent new lines based on rules.
+
+" shortcut for vimrc open
+:nnoremap <leader>ev :vsplit $MYVIMRC<cr>
+
 set incsearch " Show the first match for the pattern typing
 
-inoremap jj <esc> " remap esc to jj
-" inoremap jk <esc>
-" inoremap kj <esc>
+" inoremap jj <esc> " remap esc to jj
+inoremap jk <esc>
+inoremap kj <esc>
 
 " make enter work in normal mode
 map <Cr> o<Esc>
@@ -56,8 +62,8 @@ set wildmenu
 set showcmd
 
 " changes whitespace/tabs etc. display
-:set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
-:set list
+set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
+set list
 
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set pastetoggle=<F2>
