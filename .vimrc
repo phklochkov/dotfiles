@@ -1,4 +1,5 @@
 set nocompatible " Fuck VI... That's for grandpas.
+
 filetype off
 
 " set the runtime path to include Vundle and initialize
@@ -16,22 +17,28 @@ Plugin 'rust-lang/rust.vim'
 " plugin for surrounding ()
 Plugin 'tpope/vim-surround'
 
+" ctrlp plugin
+Plugin 'ctrlpvim/ctrlp.vim'
+
 " color themes
-Plugin 'crusoexia/vim-monokai'
+Plugin 'sickill/vim-monokai'
+
+" auto close (,'," and stuff
+Plugin 'cohama/lexima.vim'
 
 call vundle#end() " required
-
-colorscheme monokai
-set t_Co=256
 
 " We have to turn this stuff back on if we want all of our features.
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
+colo monokai
+set t_Co=256
 
 let mapleader=","
 
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
+
 
 set number relativenumber
 
@@ -48,8 +55,13 @@ set smartindent " Intellegently dedent / indent new lines based on rules.
 :nnoremap <leader>ve :vsplit $MYVIMRC<cr>
 " shortcut for vimrc source
 :nnoremap <leader>vs :source $MYVIMRC<cr>
+" shortcut for shell command
+:nnoremap <leader>s :shell<cr>
 
 set incsearch " Show the first match for the pattern typing
+" set autochange directory
+" set autochdir
+autocmd BufEnter * silent! lcd %:p:h
 
 " inoremap jj <esc> " remap esc to jj
 inoremap jk <esc>
@@ -57,7 +69,6 @@ inoremap kj <esc>
 
 " make enter work in normal mode
 map <Cr> o<Esc>
-map <S-Cr> O<Esc>
 
 set timeout timeoutlen=1000 ttimeoutlen=100 "Set timeout after special symbols
 
