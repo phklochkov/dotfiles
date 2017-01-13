@@ -75,6 +75,10 @@ set timeout timeoutlen=1000 ttimeoutlen=100 "Set timeout after special symbols
 " set status line
 set laststatus=2
 set statusline=%F
+set statusline+=\ type:\ %y
+set statusline+=%=
+set statusline+=\ col:\ %c
+set statusline+=\ total:\ %L
 
 " completion in command mode
 set wildmode=longest,list,full
@@ -87,3 +91,8 @@ set list
 
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 set pastetoggle=<leader>p
+
+"Remove all trailing whitespace by pressing F5
+nnoremap <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar><CR>
+" autoreload file on changes
+set autoread
