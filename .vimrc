@@ -7,8 +7,11 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
+" toolbar plugin
+Plugin 'vim-airline/vim-airline'
+
 " plugin for golang
-" Plugin 'fatih/vim-go'
+Plugin 'fatih/vim-go'
 
 " plugin for rust
 Plugin 'rust-lang/rust.vim'
@@ -18,6 +21,17 @@ Plugin 'tpope/vim-surround'
 
 " color themes
 Plugin 'crusoexia/vim-monokai'
+
+" ctrlp plugin
+Plugin 'ctrlpvim/ctrlp.vim'
+
+" multiple cursors plugin
+Plugin 'terryma/vim-multiple-cursors'
+
+" nerdtree plugin
+Plugin 'scrooloose/nerdtree'
+" remove buffer
+Plugin 'mhinz/vim-sayonara'
 
 call vundle#end() " required
 
@@ -65,7 +79,9 @@ set shiftround " tab / shifting moves to closest tabstop.
 set autoindent " Match indents on new lines.
 set smartindent " Intellegently dedent / indent new lines based on rules.
 
-set noshowmatch                 " Do not show matching brackets by flickerinset incsearch                   " Shows the match while typing
+set noshowmatch                 " Do not show matching brackets by flickerin
+set incsearch                   " Shows the match while typing
+set noshowmode
 set hlsearch                    " Highlight found searches
 set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not when search pattern contains upper case characters
@@ -79,12 +95,30 @@ syntax sync minlines=256
 set synmaxcol=300
 set re=1
 
+" mapping for multi_cursor
+let g:multi_cursor_use_default_mapping=0
+let g:multi_cursor_next_key='<C-i>'
+let g:multi_cursor_prev_key='<C-y>'
+let g:multi_cursor_skip_key='<C-b>'
+let g:multi_cursor_quit_key='<Esc>'
+
+" nerdtree mappings
+noremap <Leader>n :NERDTreeToggle<cr>
+noremap <Leader>f :NERDTreeFind<cr>
+
+let NERDTreeShowHidden=1
+
+let NERDTreeIgnore=['\.vim$', '\~$', '\.git$', '.DS_Store']
+
 " shortcut for vimrc open
 nnoremap <leader>ve :vsplit $MYVIMRC<cr>
 " shortcut for vimrc source
 nnoremap <leader>vs :source $MYVIMRC<cr>
 " toggle set list
 nmap <leader>l :set list!<Cr>
+
+" sayonara keybind
+nnoremap <silent> <leader>q :Sayonara<CR>
 
 " Buffer prev/next
 nnoremap <C-x> :bnext<CR>
@@ -120,10 +154,6 @@ set ttimeout notimeout ttimeoutlen=10 "Set timeout after special symbols
 set complete=.,w,b,u,t
 set completeopt=longest,menuone
 
-" set status line
-set laststatus=2
-set statusline=%F
-
 " completion in command mode
 set wildmode=longest,list,full
 set wildmenu
@@ -132,6 +162,9 @@ set showcmd
 " changes whitespace/tabs etc. display
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 set list
+
+" trim all whitespaces away
+nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd BufEnter * silent! lcd %:p:h
