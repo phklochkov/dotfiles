@@ -1,4 +1,4 @@
-set nocompatible " Fuck VI... That's for grandpas.
+set nocompatible
 filetype off
 
 " set the runtime path to include Vundle and initialize
@@ -7,43 +7,22 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" toolbar plugin
-Plugin 'vim-airline/vim-airline'
-
 " plugin for golang
 Plugin 'fatih/vim-go'
 
 " plugin for rust
 Plugin 'rust-lang/rust.vim'
 
-" plugin for surrounding ()
-Plugin 'tpope/vim-surround'
-
-" color themes
-Plugin 'crusoexia/vim-monokai'
-
-" ctrlp plugin
-Plugin 'ctrlpvim/ctrlp.vim'
-
-" multiple cursors plugin
-Plugin 'terryma/vim-multiple-cursors'
-
-" nerdtree plugin
-Plugin 'scrooloose/nerdtree'
-" remove buffer
-Plugin 'mhinz/vim-sayonara'
-
 call vundle#end() " required
 
-colorscheme monokai
-set t_Co=256
+" set t_Co=256
 
 " We have to turn this stuff back on if we want all of our features.
 filetype plugin indent on " Filetype auto-detection
 syntax on " Syntax highlighting
 
 let mapleader=","
-set background=dark
+colorscheme delek
 
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
@@ -52,6 +31,8 @@ set background=dark
 set wrap
 set textwidth=79
 set formatoptions=qrn1
+
+set statusline=%F%=%m%r%h%w[%L][%{&ff}]%y[%p%%][%04l,%04v]
 
 set number relativenumber
 
@@ -63,7 +44,7 @@ set nobackup " Don't create annoying backup files
 set nowritebackup
 set splitright " Split vertical windows right to the current windows
 set splitbelow " Split horizontal windows below to the current windows
-set encoding=utf-8 " Set default encoding to UTF-8
+" set encoding=utf-8 " Set default encoding to UTF-8
 set autowrite " Automatically save before :next, :make etc.
 set autoread
 
@@ -87,6 +68,7 @@ set ignorecase                  " Search case insensitive...
 set smartcase                   " ... but not when search pattern contains upper case characters
 set ttyfast
 set lazyredraw " Wait to redraw "
+
 " speed up syntax highlighting
 set nocursorcolumn
 set nocursorline
@@ -95,27 +77,14 @@ syntax sync minlines=256
 set synmaxcol=300
 set re=1
 
-" mapping for multi_cursor
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-i>'
-let g:multi_cursor_prev_key='<C-y>'
-let g:multi_cursor_skip_key='<C-b>'
-let g:multi_cursor_quit_key='<Esc>'
-
-" nerdtree mappings
-noremap <Leader>n :NERDTreeToggle<cr>
-noremap <Leader>f :NERDTreeFind<cr>
-
-let NERDTreeShowHidden=1
-
-let NERDTreeIgnore=['\.vim$', '\~$', '\.git$', '.DS_Store']
-
-" shortcut for vimrc open
+nnoremap <leader>t :terminal<cr>
 nnoremap <leader>ve :vsplit $MYVIMRC<cr>
-" shortcut for vimrc source
 nnoremap <leader>vs :source $MYVIMRC<cr>
+
 " toggle set list
 nmap <leader>l :set list!<Cr>
+
+nnoremap <leader>s :call StripTrailingWhitespace()<cr>
 
 " sayonara keybind
 nnoremap <silent> <leader>q :Sayonara<CR>
@@ -134,8 +103,6 @@ map <C-l> <C-W>l
 nmap <leader>w :w!<cr>
 
 nnoremap <leader><space> :nohlsearch<CR>
-" Center the screen
-nnoremap <space> zz
 
 " inoremap jj <esc> " remap esc to jj
 inoremap jk <esc>
@@ -163,9 +130,6 @@ set showcmd
 set listchars=eol:¬,tab:>·,trail:~,extends:>,precedes:<,space:␣
 set list
 
-" trim all whitespaces away
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
-
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 autocmd BufEnter * silent! lcd %:p:h
 set pastetoggle=<leader>p
@@ -188,3 +152,18 @@ if exists('+colorcolumn')
 else
   au BufWinEnter * let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1)
 endif
+
+if executable("ag")
+  set grepprg=ag\ --nogroup\ --nocolor\ --ignore-case\ --column
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+
+function! StripTrailingWhitespace()
+  if !&binary && &filetype != 'diff'
+    normal mz
+    normal Hmy
+    %s/\s\+$//e
+    normal 'yz<CR>
+    normal `z
+  endif
+endfunction
